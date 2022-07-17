@@ -7,6 +7,11 @@
           %li= msg
 
   .form-group
+    Avatar picture:
+    = @person.ava if @person.ava?
+    = f.file_field :ava, :class=>"form-control ava_loader", :label=>"Avatar"
+
+  .form-group
     = f.label :name
     = f.text_field :name, :class=>'form-control', placeholder: "Person Name"
 
@@ -36,4 +41,4 @@
 
   .actions
     = f.submit 'Save', :class=>"btn btn-success"
-    = link_to 'Cancel', after_edit_people_path, :class=>"btn btn-info"
+    = link_to 'Cancel', people_path, :class=>"btn btn-info"
