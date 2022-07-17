@@ -1,0 +1,39 @@
+= form_for @person do |f|
+  - if @person.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@person.errors.count, "error")} prohibited this person from being saved:"
+      %ul
+        - @person.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :name
+    = f.text_field :name, :class=>'form-control', placeholder: "Person Name"
+
+  .form-group
+    = f.label :phone
+    = f.text_field :phone, :class=>'form-control', placeholder: "Person Phone"
+
+  .form-group
+    = f.label :email
+    = f.text_field :email, :class=>'form-control', placeholder: "Person Email"
+
+  .form-group
+    = f.label :web
+    = f.text_field :web, :class=>'form-control', placeholder: "Person Web"
+
+  .form-group
+    = f.label :twitter
+    = f.text_field :twitter, :class=>'form-control', placeholder: "Person Twitter"
+
+  .form-group
+    = f.label :user
+    = f.collection_select :user_id, User.all, :id, :name, {}, {class: "form-control"}
+
+  .form-group
+    = f.label :about
+    = f.text_area :about, :class=>'form-control', placeholder: "About Person"
+
+  .actions
+    = f.submit 'Save', :class=>"btn btn-success"
+    = link_to 'Cancel', after_edit_people_path, :class=>"btn btn-info"

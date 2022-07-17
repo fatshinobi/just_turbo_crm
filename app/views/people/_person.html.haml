@@ -1,0 +1,6 @@
+= turbo_frame_tag person do
+  .person
+    = person.name
+    
+  = button_to 'Delete', person_path(person), method: :delete, class: 'btn btn-light'
+  = button_to 'Edit', edit_person_path(person), method: :get, class: 'btn btn-light'
