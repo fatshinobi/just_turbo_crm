@@ -6,7 +6,7 @@
         = image_tag(ava_pic, :class=>"ava_pic", size: "150x150")
       .col-md-11
         %h2.index_show_button
-          = person.name
+          = link_to person.name, person_path(person), data: { turbo_frame: '_top' }
         %p.about_text
           = person.about
 

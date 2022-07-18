@@ -1,0 +1,34 @@
+%p#notice= notice
+
+%h1
+  = @person.name
+
+- content_for :sidebar do
+  - ava_pic = @person.ava.normal.url ? @person.ava.normal.url: 'thumb_anonymous.png'
+  .ava_holder
+    = image_tag ava_pic, :class=>"ava_big_pic"
+  .border.about_text_frame
+    %p{:class=>"show_field"}
+      %b About:
+      = @person.about
+  %p{:class=>"show_field"}
+    %b Phone:
+    = @person.phone
+  %p{:class=>"show_field"}
+    %b Email:
+    = @person.email
+  %p{:class=>"show_field"}
+    %b Facebook:
+    = @person.facebook
+  %p{:class=>"show_field"}
+    %b Twitter:
+    = @person.twitter
+  %p{:class=>"show_field"}
+    %b Web:
+    = @person.web
+
+  %p{:class=>"show_field"}
+    %b Curator:
+    = @person.user.name
+
+  = link_to 'Back to People list', people_path
