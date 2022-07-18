@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :companies do
+    collection do
+      get 'after_edit'
+    end
+  end
+
   resources :people do
     collection do
       get 'after_edit'

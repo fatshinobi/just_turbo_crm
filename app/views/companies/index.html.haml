@@ -1,0 +1,15 @@
+= turbo_stream_from 'companies'
+
+%h1 Listing companies
+
+= turbo_frame_tag "companies" do
+  - @companies.ordered.each do |company|
+    = render company
+
+%p{:class=>'clearfix'}
+  = paginate @companies
+
+- content_for :sidebar do
+  .container
+    %h4 Add:
+    = render partial: '/shared/new_menu'

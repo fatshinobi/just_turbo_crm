@@ -1,0 +1,28 @@
+%p#notice= notice
+
+%h1
+  = @company.name
+
+- content_for :sidebar do
+  - ava_pic = @company.ava.normal.url ? @company.ava.normal.url: 'thumb_anonymous.png'
+  .ava_holder
+    = image_tag ava_pic, :class=>"ava_big_pic"
+  .border.about_text_frame
+    %p{:class=>"show_field"}
+      %b About:
+      = @company.about
+  %p{:class=>"show_field"}
+    %b Phone:
+    = @company.phone
+  %p{:class=>"show_field"}
+    %b Address:
+    = @company.address
+  %p{:class=>"show_field"}
+    %b Web:
+    = @company.web
+
+  %p{:class=>"show_field"}
+    %b Curator:
+    = @company.user.name
+
+  = link_to 'Back to Companies list', companies_path

@@ -1,0 +1,40 @@
+= form_for @company do |f|
+  - if @company.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@company.errors.count, "error")} prohibited this company from being saved:"
+      %ul
+        - @company.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    Avatar picture:
+    = @company.ava if @company.ava?
+    = f.file_field :ava, :class=>"form-control ava_loader", :label=>"Avatar"
+
+  .form-group
+    = f.label :name
+    = f.text_field :name, :class=>'form-control', placeholder: "Company Name"
+
+  .form-group
+    = f.label :phone
+    = f.text_field :phone, :class=>'form-control', placeholder: "Company Phone"
+
+  .form-group
+    = f.label :web
+    = f.text_field :web, :class=>'form-control', placeholder: "Company Web"
+
+  .form-group
+    = f.label :address
+    = f.text_area :address, :class=>'form-control', placeholder: "Company Address"
+
+  .form-group
+    = f.label :user
+    = f.collection_select :user_id, User.all, :id, :name, {}, {class: "form-control"}
+
+  .form-group
+    = f.label :about
+    = f.text_area :about, :class=>'form-control', placeholder: "About Company"
+
+  .actions
+    = f.submit 'Save', :class=>"btn btn-success"
+    = link_to 'Cancel', @after_cancel, :class=>"btn btn-info"

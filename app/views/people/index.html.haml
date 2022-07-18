@@ -1,9 +1,6 @@
 = turbo_stream_from 'people'
 
 %h1 Listing people
-- if params[:tag]
-  %h4 
-    = "By tag: " << params[:tag]
 
 = turbo_frame_tag "people" do
   - @people.ordered.each do |person|
