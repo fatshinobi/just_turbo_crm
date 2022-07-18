@@ -17,9 +17,9 @@
 
     %div{:class=>"main-form container-fluid"}
       %div{:class=>"row"}
-        %div{:class=>"#{'content' if @is_list} col-sm-7"}
+        %div.content.col-md-7
           %p#notice= notice
           = yield
-        %div{:class=>"sidebar col-sm-3"}
+        %div.sidebar.col-md-3
           = yield(:sidebar)
     = render partial: '/shared/footer'

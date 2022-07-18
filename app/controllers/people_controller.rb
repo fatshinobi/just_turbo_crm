@@ -7,6 +7,7 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
+    @after_cancel = after_edit_people_path
   end
 
   def create
@@ -40,6 +41,10 @@ class PeopleController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @after_cancel = people_path
   end
 
   private
