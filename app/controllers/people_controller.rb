@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+  include Responsible
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -14,10 +15,7 @@ class PeopleController < ApplicationController
     @person = Person.new(person_params)
     
     if @person.save
-      respond_to do |format|
-        format.html { redirect_to people_path, notice: 'Person was successfully created' }
-        format.turbo_stream { flash.now[:notice] = 'Person was successfully created' }
-      end
+      respond_with_item(people_path, 'Person')
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,19 +23,13 @@ class PeopleController < ApplicationController
 
   def destroy
     @person.destroy
-
-    respond_to do |format|
-      format.html { redirect_to persons_path, notice: 'Person was successfully destroyed' }
-      format.turbo_stream { flash.now[:notice] = 'Person was successfully destroyed' }
-    end
+    
+    respond_with_item(people_path, 'Person')
   end
 
   def update
     if @person.update(person_params)
-      respond_to do |format|
-        format.html { redirect_to people_path, notice: 'Person was successfully updated' }
-        format.turbo_stream { flash.now[:now] = 'Person was successfully updated' }
-      end
+      respond_with_item(people_path, 'Person')
     else
       render :edit, status: :unprocessable_entity
     end

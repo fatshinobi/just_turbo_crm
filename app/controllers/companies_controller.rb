@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+  include Responsible
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -14,10 +15,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
     
     if @company.save
-      respond_to do |format|
-        format.html { redirect_to companies_path, notice: 'Company was successfully created' }
-        format.turbo_stream { flash.now[:notice] = 'Company was successfully created' }
-      end
+      respond_with_item(companies_path, 'Company')
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,18 +24,12 @@ class CompaniesController < ApplicationController
   def destroy
     @company.destroy
 
-    respond_to do |format|
-      format.html { redirect_to companies_path, notice: 'Company was successfully destroyed' }
-      format.turbo_stream { flash.now[:notice] = 'Company was successfully destroyed' }
-    end
+    respond_with_item(companies_path, 'Company')
   end
 
   def update
     if @company.update(company_params)
-      respond_to do |format|
-        format.html { redirect_to companies_path, notice: 'Company was successfully updated' }
-        format.turbo_stream { flash.now[:now] = 'Company was successfully updated' }
-      end
+      respond_with_item(companies_path, 'Company')
     else
       render :edit, status: :unprocessable_entity
     end
