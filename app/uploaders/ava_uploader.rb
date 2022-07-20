@@ -37,6 +37,10 @@ class AvaUploader < CarrierWave::Uploader::Base
     process :resize_to_fit => [50, 50]
   end
 
+  version :middle do
+    process :resize_to_fit => [100, 100]
+  end
+
   version :thumb do
     process :resize_to_fit => [150, 150]
   end

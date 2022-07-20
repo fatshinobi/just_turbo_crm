@@ -3,6 +3,10 @@
 %h1
   = @person.name
 
+%h2 Companies:
+- @person.company_people.each do |company_person|
+  = render partial: "company_people/short_person_company", locals: {company_person: company_person}
+
 - content_for :sidebar do
   - ava_pic = @person.ava.normal.url ? @person.ava.normal.url: 'thumb_anonymous.png'
   .ava_holder
