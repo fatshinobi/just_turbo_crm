@@ -1,0 +1,18 @@
+= turbo_frame_tag opportunity do
+  .opportunity.border.entry1
+    .row
+      .col-md-1
+        - ava_pic = "#{opportunity.get_stage}_opportunity.jpg"
+        = image_tag(ava_pic, :class=>"ava_pic", size: "150x150")
+      .col-md-11
+        %h2.index_show_button
+          = link_to opportunity.title, opportunity_path(opportunity), data: { turbo_frame: '_top' }
+        %p.about_text
+          = opportunity.description
+
+        .row
+          .col-md-8
+          .col-md-2
+            = button_to 'Edit', edit_opportunity_path(opportunity), method: :get, class: 'btn btn-link'
+          .col-md-2
+            = button_to 'Delete', opportunity_path(opportunity), method: :delete, class: 'btn btn-link', form: { data: { turbo_confirm: "Are you sure you want to delete this?"} }

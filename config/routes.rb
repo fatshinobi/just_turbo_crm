@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :opportunities do
+    collection do
+      get 'after_edit'
+    end
+  end
+
   resources :companies do
     collection do
       get 'after_edit'
@@ -8,6 +14,7 @@ Rails.application.routes.draw do
   resources :people do
     collection do
       get 'after_edit'
+      get 'by_company/:company_id' => 'people#by_company'
     end
   end
 

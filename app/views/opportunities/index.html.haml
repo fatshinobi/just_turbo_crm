@@ -1,0 +1,15 @@
+= turbo_stream_from 'opportunities'
+
+%h1 Opportunities
+
+= turbo_frame_tag "opportunities" do
+  - @opportunities.ordered.each do |opportunity|
+    = render opportunity
+
+%p{:class=>'clearfix'}
+  = paginate @opportunities
+
+- content_for :sidebar do
+  .container
+    %h4 Add:
+    = render partial: '/shared/new_menu'

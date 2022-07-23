@@ -1,0 +1,53 @@
+= nested_form_for @opportunity do |f|
+  - if @opportunity.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@opportunity.errors.count, "error")} prohibited this person from being saved:"
+      %ul
+        - @opportunity.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :title
+    = f.text_field :title, :class=>'form-control', placeholder: "Title"
+
+  .form-group
+    = f.label :start
+    = f.text_field :start, type: 'date', :class=>'form-control', placeholder: "Start Date"
+
+  .form-group
+    = f.label :finish
+    = f.text_field :finish, type: 'date', :class=>'form-control', placeholder: "Finish Date"
+  %div{ 'data-controller' => 'people-of-customer' }
+    .form-group
+      = f.label :company_id
+      = f.collection_select :company_id, Company.all, :id, :name, {}, data: { action: 'change->people-of-customer#set_people' }, class: "form-control"
+
+    .form-group
+      = f.label :person_id
+      = f.collection_select :person_id, Person.all, :id, :name, {:include_blank => false}, 'data-people-of-customer-target'=>'person_list', class: "form-control"
+
+  .form-group
+    = f.label :amount
+    = f.text_field :amount, :class=>'form-control', placeholder: "Amount"
+
+  .form-group
+    = f.label :stage
+    = f.collection_select :stage, select_data_from_array(Opportunity::STAGES_LIST), :value, :caption, {}, {class: 'form-control'}
+
+  .form-group
+    = f.label :status
+    = f.collection_select :status, select_data_from_array(Opportunity::STATUS_LIST), :value, :caption, {}, {class: 'form-control'}
+
+  .form-group
+    = f.label :user
+    = f.collection_select :user_id, User.all, :id, :name, {}, {class: "form-control"}
+
+  .form-group
+    = f.label :description
+    = f.text_area :description, :class=>'form-control', placeholder: "Description"
+
+  .actions.top_space
+    = f.submit 'Save', :class=>"btn btn-success"
+    - cancel_attr = { :class=>"btn btn-info"}
+    - cancel_attr[:data] = { turbo_frame: '_top' } unless @framed
+    = link_to 'Cancel', @after_cancel, cancel_attr

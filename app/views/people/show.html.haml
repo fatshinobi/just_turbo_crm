@@ -7,6 +7,10 @@
 - @person.company_people.each do |company_person|
   = render partial: "company_people/short_person_company", locals: {company_person: company_person}
 
+%h2{ style: 'clear:both' } Opportunities:
+- @person.opportunities.each do |opportunity|
+  = render partial: "opportunities/opportunity", locals: {opportunity: opportunity}
+
 - content_for :sidebar do
   - ava_pic = @person.ava.normal.url ? @person.ava.normal.url: 'thumb_anonymous.png'
   .ava_holder
@@ -35,4 +39,6 @@
     %b Curator:
     = @person.user.name
 
+  = link_to 'Edit', edit_person_path(@person)
+  \|
   = link_to 'Back to People list', people_path

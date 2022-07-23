@@ -1,0 +1,5 @@
+- if @framed
+  = turbo_frame_tag @opportunity do
+    = render "edit_entry", opportunity: @opportunity
+- else
+  = render "edit_entry", opportunity: @opportunity

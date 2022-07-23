@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+  protect_from_forgery except: [:by_company]
   include Responsible
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
@@ -37,6 +38,16 @@ class PeopleController < ApplicationController
 
   def edit
     @after_cancel = people_path
+  end
+
+  def by_company
+    company_id = params[:company_id]
+
+    result_list = CompanyPerson.joins(:person).where( company_id: company_id ).pluck(:person_id, :name).map { |rec| {id: rec[0], name: rec[1]} }
+
+    respond_to do |format|
+      format.js { render json: result_list }
+    end
   end
 
   private

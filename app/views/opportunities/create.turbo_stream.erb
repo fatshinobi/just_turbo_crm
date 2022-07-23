@@ -1,0 +1,3 @@
+<%= turbo_stream.prepend "opportunities", partial: 'opportunities/opportunity', locals: { opportunity: @opportunity } %>
+<%= turbo_stream.update Opportunity.new, partial: 'new_menu' %>
+<%= render_turbo_stream_flash_message %>

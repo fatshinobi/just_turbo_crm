@@ -7,6 +7,10 @@
 - @company.company_people.each do |company_person|
   = render partial: "company_people/short_company_person", locals: {company_person: company_person}
 
+%h2{ style: 'clear:both' } Opportunities:
+- @company.opportunities.each do |opportunity|
+  = render partial: "opportunities/opportunity", locals: {opportunity: opportunity}
+
 - content_for :sidebar do
   - ava_pic = @company.ava.normal.url ? @company.ava.normal.url: 'thumb_anonymous.png'
   .ava_holder

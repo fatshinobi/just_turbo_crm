@@ -1,0 +1,52 @@
+%h1
+  = @opportunity.title
+
+.alert.alert-success
+  %h3
+    = "Stage: #{ Opportunity::STAGES_LIST[@opportunity.stage] }"
+
+.row
+  .col-6
+    %h3 Company:
+    .expand_field
+      = render partial: "companies/short_company", locals: {company: @opportunity.company}
+  .col-6
+    - if @opportunity.person
+      %h3 Person:
+      .expand_field
+        = render partial: "people/short_person", locals: {person: @opportunity.person}
+
+- content_for :sidebar do
+  .ava_holder
+    - ava_pic = "#{@opportunity.get_stage}_opportunity.jpg"
+    = image_tag(ava_pic, :class=>"ava_pic", size: "150x150")
+
+    .border.about_text_frame
+      %p{:class=>"show_field"}
+        %b Description:
+        = @opportunity.description
+  
+  %p{:class=>"show_field"}
+    %b Status:
+    = Opportunity::STATUS_LIST[@opportunity.status]
+  
+  %p{:class=>"show_field"}
+    %b Start:
+    = @opportunity.start&.strftime('%T')
+
+  %p{:class=>"show_field"}
+    %b Finish:
+    = @opportunity.finish&.strftime('%T')
+
+  %p{:class=>"show_field"}
+    %b Amount:
+    = @opportunity.amount.to_s
+
+  %p{:class=>"show_field"}
+    %b Curator:
+    = @opportunity.user.name
+
+
+  = link_to 'Edit', edit_opportunity_path(@opportunity)
+  \|
+  = link_to 'Back to Opportunities List', opportunities_path

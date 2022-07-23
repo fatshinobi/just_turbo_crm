@@ -8,6 +8,8 @@
           = link_to "People", people_path, class: "nav-link #{'active' if controller_name == 'people'}"
         %li.nav-item
           = link_to "Companies", companies_path, class: "nav-link #{'active' if controller_name == 'companies'}"
+        %li.nav-item
+          = link_to "Sales", opportunities_path, class: "nav-link #{'active' if controller_name == 'opportunities'}"
 
       %ul.navbar-nav.pull-right
         - if user_signed_in?

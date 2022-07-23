@@ -4,6 +4,8 @@ class Company < ApplicationRecord
   has_many :company_people, :inverse_of => :company
   accepts_nested_attributes_for :company_people, reject_if: :all_blank, allow_destroy: true
 
+  has_many :opportunities
+
   validates :name, presence: true
   validates :name, uniqueness: true
   validates :name, length: { minimum: 3 }
