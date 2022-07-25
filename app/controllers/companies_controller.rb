@@ -8,6 +8,7 @@ class CompaniesController < ApplicationController
 
   def new
     @company = Company.new
+    @framed = true
     @after_cancel = after_edit_companies_path
   end
 
@@ -29,14 +30,16 @@ class CompaniesController < ApplicationController
 
   def update
     if @company.update(company_params)
-      respond_with_item(companies_path, 'Company')
+      respond_for_update(companies_path, company_path(@company), 'Company')
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def edit
-    @after_cancel = companies_path
+    @framed = respond_for_cancel
+    path_to = @framed ? companies_path : company_path(@company)
+    @after_cancel = path_to
   end
 
   private

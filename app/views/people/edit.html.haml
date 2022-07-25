@@ -1,3 +1,5 @@
-= turbo_frame_tag @person do
-  .border.edit_entry
-    = render "form", person: @person
+- if @framed
+  = turbo_frame_tag @person do
+    = render "edit_entry", person: @person
+- else
+  = render "edit_entry", person: @person

@@ -9,6 +9,7 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
+    @framed = true
     @after_cancel = after_edit_people_path
   end
 
@@ -30,14 +31,16 @@ class PeopleController < ApplicationController
 
   def update
     if @person.update(person_params)
-      respond_with_item(people_path, 'Person')
+      respond_for_update(people_path, person_path(@person), 'Person')
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def edit
-    @after_cancel = people_path
+    @framed = respond_for_cancel
+    path_to = @framed ? people_path : person_path(@person)
+    @after_cancel = path_to
   end
 
   def by_company

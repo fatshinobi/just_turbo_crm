@@ -76,4 +76,7 @@
 
   .actions.top_space
     = f.submit 'Save', :class=>"btn btn-success"
-    = link_to 'Cancel', @after_cancel, :class=>"btn btn-info"
+    - cancel_attr = { :class=>"btn btn-info"}
+    - cancel_attr[:data] = { turbo_frame: '_top' } unless @framed
+
+    = link_to 'Cancel', @after_cancel, cancel_attr

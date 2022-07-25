@@ -1,3 +1,5 @@
-= turbo_frame_tag @company do
-  .border.edit_entry
-    = render "form", company: @company
+- if @framed
+  = turbo_frame_tag @company do
+    = render "edit_entry", company: @company
+- else
+  = render "edit_entry", company: @company
