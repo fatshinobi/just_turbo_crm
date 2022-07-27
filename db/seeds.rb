@@ -10,7 +10,6 @@ require_relative '../lib/populator_fix.rb'
 
 curr_user = User.first
 
-=begin
 Person.populate 10 do |person|
   person.name = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
   person.phone = Faker::PhoneNumber.phone_number
@@ -29,7 +28,6 @@ Company.populate 10 do |company|
   company.web = Faker::Internet.url
   company.user_id = curr_user.id
 end
-=end
 
 Person.all.each do |person_for_link|
   rend_indx = rand(1..10)
